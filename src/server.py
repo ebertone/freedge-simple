@@ -83,19 +83,21 @@ def main(args):
   # Main Loop
   # ##########################
   print('Freedge Prototype is intialized. \n\nStarting running...')
+  pwd = os.getcwd()
+  
   try: 
     while True:
       images = freedge.run()
       #sensory_data, images = freedge.run()#CANCELLED IN THE SIMPLE VERSION
       # Upload to drop box
       if images:
-          os.chdir("/home/pi/Dropbox-Uploader")
+          os.chdir("../Dropbox-Uploader") 
           upload_image0 = "./dropbox_uploader.sh upload /home/pi/outputs/camera0.jpg ."
           upload_image2 = "./dropbox_uploader.sh upload /home/pi/outputs/camera2.jpg ."
           upload_process0 = subprocess.Popen(upload_image0.split(), stdout=subprocess.PIPE)
           
           upload_process2 = subprocess.Popen(upload_image2.split(), stdout=subprocess.PIPE)
-          
+          os.chdir(pwd)
       """ #CANCELLED IN THE SIMPLE VERSION
       # Upload data to cloud
       
