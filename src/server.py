@@ -42,6 +42,8 @@ import sys
 import time
 import cv2
 import argparse
+import subprocess
+import os
 
 from Freedge import Freedge
 #from cloud.CloudDB import CloudDB
@@ -85,11 +87,22 @@ def main(args):
     while True:
       images = freedge.run()
       #sensory_data, images = freedge.run()#CANCELLED IN THE SIMPLE VERSION
+      # Upload to drop box
+      if images:
+          os.chdir("/home/pi/Dropbox-Uploader")
+          upload_image0 = "./dropbox_uploader.sh upload /home/pi/outputs/camera0.jpg ."
+          upload_image2 = "./dropbox_uploader.sh upload /home/pi/outputs/camera2.jpg ."
+          upload_process0 = subprocess.Popen(upload_image0.split(), stdout=subprocess.PIPE)
+          
+          upload_process2 = subprocess.Popen(upload_image2.split(), stdout=subprocess.PIPE)
+          
       """ #CANCELLED IN THE SIMPLE VERSION
       # Upload data to cloud
+      
       if sensory_data:
         msg, ok = cloud.upload(sensory_data, args.device_id, location='US')
-        """  
+        """
+      
       # Perform  Object Detection on new images [for demo purposes].
       # Later, this process should be run in cloud.
       '''if images:
