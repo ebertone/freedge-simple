@@ -110,15 +110,22 @@ class Freedge(object):
 
     # For print debugging message to std
       self.verbose = verbose
+      
+    # Counter for number of times door is open
+      self.num_times_open = 0
+      self.new_time = time.ctime()
 
   def run(self):
     """This function get called in a while-loop 
     to determine the current status of Freedge.
     """
-
-    if self.door.is_open() and not self.is_triggered: 
+    
+    
+    if self.door.is_open() and not self.is_triggered:
+      self.new_time = time.ctime()
       if self.verbose:
         print("Door is opening.")
+        #self.increment_open()
       self.is_triggered = True
       return None
       #return None, None #CANCELLED IN THE SIMPLE VERSION
@@ -207,4 +214,9 @@ class Freedge(object):
     time.sleep(1.0)  # Wating for all the LEDs to turn off.
     # Turn off GPIO
     self.door.cleanup()
+
+#  def increment_open(self):
+#      self.num_times_open += 1
+#      print(self.num_times_open)
+
     

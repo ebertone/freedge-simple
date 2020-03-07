@@ -84,7 +84,8 @@ def main(args):
   # ##########################
   print('Freedge Prototype is intialized. \n\nStarting running...')
   pwd = os.getcwd()
-  
+  print("pwd: ", pwd)
+  start_date = time.ctime()
   try: 
     while True:
       images = freedge.run()
@@ -98,6 +99,8 @@ def main(args):
           
           upload_process2 = subprocess.Popen(upload_image2.split(), stdout=subprocess.PIPE)
           os.chdir(pwd)
+          # cmp freedge.new_time & start time
+          
       """ #CANCELLED IN THE SIMPLE VERSION
       # Upload data to cloud
       
